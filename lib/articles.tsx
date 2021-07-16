@@ -52,7 +52,7 @@ export const getRecentArticles = async (amount = 10) => {
     const articles = [];
 
     while (articles.length <= 10 && years.length) {
-        const articlesPerYear = getArticlesInfoForYear(years[years.length - 1])?.items;
+        const articlesPerYear = getArticlesInfoForYear(years[years.length - 1]);
         articles.push(
             ...(articlesPerYear.slice(0, Math.min(articlesPerYear.length, amount)))
         );
@@ -82,5 +82,13 @@ const getArticlesForYear = (year: string) => {
 
 const getArticlesInfoForYear = (year: string) => {
     const directory = path.join(articleYearsDirectory, year, `${year}.json`);
-    return JSON.parse('' + fs.readFileSync(directory));
+    const data = JSON.parse('' + fs.readFileSync(directory));
+    let articles = data?.items;
+    if (articles?.length) {
+        articles = articles.map(a => ({
+            ...a,
+            link: `${year}/${a.title.toLowerCase()}`
+        }))
+    }
+    return articles;
 }

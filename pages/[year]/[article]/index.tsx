@@ -2,6 +2,7 @@ import { format, parseISO } from 'date-fns';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
+import Link from 'next/link';
 import { getAllArticlesPaths, getArticleData } from '../../../lib/articles';
 import { getImgurPictures } from '../../../lib/imgur-pictures';
 
@@ -11,6 +12,9 @@ export default function Post({ articleData, pictures }) {
             <Head>
                 <title>{articleData.title} - {format(parseISO(articleData.date), 'yyyy')}</title>
             </Head>
+            <Link href={'/'}>
+                <a>Back home</a>
+            </Link>
             <article>
                 <h1>{articleData.title}</h1>
                 {articleData.date} <br/>
