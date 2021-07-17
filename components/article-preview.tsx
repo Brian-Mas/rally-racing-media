@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from '../styles/Article.module.scss';
+import styles from '../styles/article-preview.module.scss';
 
 export default function ArticlePreview({ article }) {
     return (
