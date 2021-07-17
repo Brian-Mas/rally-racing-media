@@ -16,8 +16,8 @@ export default function Home({ length, articles }) {
                     href="/favicon.ico" />
             </Head>
 
-            <main>
-                <h1>Home</h1>
+            <main className={styles.main}>
+                <h1>Rally Racing Media</h1>
                 <div className={styles.grid}>
                     {articles.map((a) => {
                         return (

@@ -1,20 +1,14 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  width: 80vw;
+  width: 100vw;
 }
 
 .main {
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
 .grid {
@@ -23,9 +17,10 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 3rem;
+  width: 100%;
 
   > a {
-    flex-basis: 33%;
+    flex-basis: 50%;
   }
 }
 
