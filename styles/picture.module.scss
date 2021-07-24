@@ -1,0 +1,54 @@
+.imageOverlayContainer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.95);
+    z-index: 100;
+}
+
+.closeImageOverlay {
+    @extend %imageOverlayControlBase;
+
+    right: 1rem;
+    top: 1rem;
+}
+
+.previousImageOverlay {
+    @extend %imageOverlayControlBase;
+
+    left: 1rem;
+    bottom: 1rem;
+}
+
+.nextImageOverlay {
+    @extend %imageOverlayControlBase;
+
+    right: 1rem;
+    bottom: 1rem;
+}
+
+.imageOverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 101;
+    background-color: rgba(0,0,0,.9);
+}
+
+%imageOverlayControlBase {
+    position: fixed;
+    background-color: rgba(255,255,255, .7);
+    border: 3px solid rgba(0,0,0,.7);
+    height: 5rem;
+    width: 5rem;
+    z-index: 102;
+    font-size: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
