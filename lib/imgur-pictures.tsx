@@ -1,5 +1,6 @@
-import FormData from 'form-data';
 import axios from 'axios';
+import FormData from 'form-data';
+import { Picture } from '../classes/picture';
 
 let IMGUR_TOKEN: string;
 
@@ -8,7 +9,7 @@ export const getImgurPictures = async (albumId: string) => {
     return getImgurAlbum(albumId);
 };
 
-const getImgurAlbum = async (albumId: string) => {
+const getImgurAlbum = async (albumId: string): Promise<Picture[]> => {
     const data = new FormData();
     return axios({
         method: 'get',
@@ -20,12 +21,7 @@ const getImgurAlbum = async (albumId: string) => {
         data : data
     })
         .then(function (response) {
-            const data = {
-                cover: response.data.data.cover,
-                images: response.data.data.images
-            };
-            // console.log('data', data);
-            return data;
+            return response.data.data.images;
         })
         .catch(function (error) {
             console.log(error);

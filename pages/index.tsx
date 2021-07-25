@@ -1,11 +1,14 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import { Article } from '../classes/article';
 import ArticlePreview from '../components/article-preview';
 import { getRecentArticles } from '../lib/articles';
 import styles from '../styles/Home.module.scss';
 
-export default function Home({ articles }) {
+export default function Home({ _articles }) {
+    const articles: Article[] = _articles;
+
     return (
         <div className={styles.container}>
             <Head>
@@ -22,7 +25,7 @@ export default function Home({ articles }) {
                         return (
                             <Link href={`${a.link}`} key={index}>
                                 <a>
-                                    <ArticlePreview article={a} />
+                                    <ArticlePreview _article={a} />
                                 </a>
                             </Link>
                         )
@@ -37,7 +40,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const articles = await getRecentArticles();
     return {
         props: {
-            articles: articles
+            _articles: articles
         }
     };
 };

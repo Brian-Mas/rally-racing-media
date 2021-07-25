@@ -3,15 +3,19 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
+import { ArticleData } from '../../../classes/article-data';
+import { Picture } from '../../../classes/picture';
 import PictureFullscreen from '../../../components/picture-fullscreen';
 import { getAllArticlesPaths, getArticleData } from '../../../lib/articles';
 import { shimmer, toBase64 } from '../../../lib/image-shimmer';
 import { getImgurPictures } from '../../../lib/imgur-pictures';
 import styles from '../../../styles/article.module.scss';
 
-export default function Post({ props, articleData, pictures }) {
+export default function Post({ props, _articleData, _pictures }) {
     const [activeIndex, setActiveIndex] = React.useState(null);
     const isAPictureActive = activeIndex !== null;
+    const articleData: ArticleData = _articleData;
+    const pictures: Picture[] = _pictures;
 
     const selectPicture = (a) => {
         setActiveIndex(a);
@@ -19,7 +23,7 @@ export default function Post({ props, articleData, pictures }) {
 
     const prev = () => {
         let index = activeIndex - 1;
-        if (index < 0) { index = pictures.images.length - 1; }
+        if (index < 0) { index = pictures.length - 1; }
 
         setActiveIndex(index);
     };
@@ -30,7 +34,7 @@ export default function Post({ props, articleData, pictures }) {
 
     const next = () => {
         let index = activeIndex + 1;
-        if (index >= pictures.images.length) { index = 0; }
+        if (index >= pictures.length) { index = 0; }
 
         setActiveIndex(index);
     };
@@ -51,7 +55,7 @@ export default function Post({ props, articleData, pictures }) {
 
                     <h1>Pictures</h1>
                     <div className={styles.gallery}>
-                        {pictures.images.map((p, index) => {
+                        {pictures.map((p, index) => {
                             return (
                                 <div className={styles.picture}
                                      key={index}>
@@ -71,7 +75,7 @@ export default function Post({ props, articleData, pictures }) {
             </div>
 
             {isAPictureActive &&
-            <PictureFullscreen id={pictures.images[activeIndex].id}
+            <PictureFullscreen id={pictures[activeIndex].id}
                                prev={prev}
                                close={close}
                                next={next} />
@@ -89,12 +93,12 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const articleData = await getArticleData(params.year as string, params.article as string);
-    const pictures = await getImgurPictures(articleData.imgurAlbumId);
+    const pictures = await getImgurPictures(articleData.albumId);
 
     return {
         props: {
-            articleData,
-            pictures
+            _articleData: articleData,
+            _pictures: pictures
         }
     };
 };

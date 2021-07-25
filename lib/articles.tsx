@@ -3,6 +3,8 @@ import matter from 'gray-matter';
 import path from 'path';
 import remark from 'remark';
 import html from 'remark-html';
+import { Article } from '../classes/article';
+import { ArticleData } from '../classes/article-data';
 import { articleYearsDirectory, getAllYears } from './years';
 
 export const getAllArticlesPaths = () => {
@@ -32,24 +34,23 @@ export const getArticleData = async (year: string, id: string) => {
         .process(matterResult.content);
     const contentHtml = processedContent.toString();
 
+
     // Combine the data with the id and contentHtml
-    return {
-        id,
+    const result: ArticleData = {
         contentHtml,
         ...(matterResult.data as {
             date: string;
             title: string;
-            facebookUrl: string;
-            youtubeUrl: string;
-            imgurCoverImageId: string;
-            imgurAlbumId: string;
+            cover: string;
+            albumId: string;
         })
     }
+    return result;
 }
 
 export const getRecentArticles = async (amount = 10) => {
     const years = getYears();
-    const articles = [];
+    const articles = new Array<Article>();
 
     while (articles.length <= 10 && years.length) {
         const articlesPerYear = getArticlesInfoForYear(years[years.length - 1]);
@@ -91,5 +92,5 @@ const getArticlesInfoForYear = (year: string) => {
             link: `${year}/${a.title.toLowerCase()}`
         }))
     }
-    return articles;
+    return articles as Article[];
 }
