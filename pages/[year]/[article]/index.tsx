@@ -79,6 +79,12 @@ export default function Post({ props, _articleData, _pictures }) {
                             return (
                                 <div className={styles.picture}
                                      key={index}>
+                                    <div className={styles.logoOverlay}>
+                                        <Image src={'/RallyRacingMedia.svg'}
+                                               alt="Rally Racing Media logo"
+                                               width={100}
+                                               height={60} />
+                                    </div>
                                     <Image src={p.link}
                                            alt={articleData.title + '_' + index}
                                            layout={'fill'}
