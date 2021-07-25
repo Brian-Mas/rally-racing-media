@@ -1,0 +1,44 @@
+.article {
+    display: flex;
+    margin: 0 1rem 2rem 0;
+    padding: 0 1rem 0 0;
+    border: 2px solid #afafaf;
+    border-radius: 1rem;
+    min-height: 300px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+        -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+        box-shadow: 0 0 10px 5px rgb(0 0 0 / 25%);
+    }
+
+    .details {
+        position: absolute;
+        color: #ffffff;
+        padding: 0 1rem 1rem 1rem;
+        background-color: rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.6);
+        bottom: 0;
+        z-index: 2;
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .date {
+            color: #c8c8c8;
+        }
+    }
+
+    &:hover {
+        .details {
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.9);
+            text-decoration: underline;
+        }
+    }
+}
