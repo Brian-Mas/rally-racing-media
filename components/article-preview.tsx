@@ -10,6 +10,7 @@ export default function ArticlePreview({ _article }) {
         <div className={styles.article}>
             <div className={styles.image}>
                 <Image src={`https://i.imgur.com/${article.cover}.png`}
+                       alt={article.title}
                        quality={25}
                        layout={'fill'}
                        placeholder="blur"
