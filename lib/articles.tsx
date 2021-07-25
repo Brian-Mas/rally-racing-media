@@ -41,6 +41,7 @@ export const getArticleData = async (year: string, id: string) => {
         ...(matterResult.data as {
             date: string;
             title: string;
+            description: string;
             cover: string;
             albumId: string;
         })

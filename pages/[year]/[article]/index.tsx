@@ -16,6 +16,7 @@ export default function Post({ props, _articleData, _pictures }) {
     const isAPictureActive = activeIndex !== null;
     const articleData: ArticleData = _articleData;
     const pictures: Picture[] = _pictures;
+    const date = parseISO(articleData.date);
 
     const selectPicture = (a) => {
         setActiveIndex(a);
@@ -42,7 +43,26 @@ export default function Post({ props, _articleData, _pictures }) {
     return (
         <>
             <Head>
-                <title>{articleData.title} - {format(parseISO(articleData.date), 'yyyy')}</title>
+                <title>{articleData.title} - {format(date, 'yyyy')}</title>
+
+                {/*Primary Meta Tags*/}
+                <title>{articleData.title} - {format(date, 'yyyy')}</title>
+                <meta name="title" content={`${articleData.title} - ${format(date, 'yyyy')}`} />
+                <meta name="description" content={articleData.description} />
+
+                {/*Open Graph / Facebook*/}
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={`https://rallyracingmedia.com/${format(date, 'yyyy')}/${articleData.title}`} />
+                <meta property="og:title" content={articleData.title} />
+                <meta property="og:description" content={articleData.description} />
+                <meta property="og:image" content={`https://i.imgur.com/${articleData.cover}.png`} />
+
+                {/*Twitter*/}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content={`https://rallyracingmedia.com/${format(date, 'yyyy')}/${articleData.title}`} />
+                <meta property="twitter:title" content={articleData.title} />
+                <meta property="twitter:description" content={articleData.description} />
+                <meta property="twitter:image" content={`https://i.imgur.com/${articleData.cover}.png`} />
             </Head>
             <div className={`${styles.pageContainer} ${isAPictureActive ? '' : styles.overflow}`}>
                 <article className={styles.container}>
