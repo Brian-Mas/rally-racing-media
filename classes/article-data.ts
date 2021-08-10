@@ -5,4 +5,5 @@ export class ArticleData extends Article {
     date: string;
     albumId: string;
     contentHtml: string;
+    youtubeId: string;
 }

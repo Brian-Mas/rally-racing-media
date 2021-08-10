@@ -44,6 +44,7 @@ export const getArticleData = async (year: string, id: string) => {
             description: string;
             cover: string;
             albumId: string;
+            youtubeId: string
         })
     }
     return result;
