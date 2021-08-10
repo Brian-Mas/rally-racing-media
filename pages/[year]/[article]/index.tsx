@@ -6,6 +6,7 @@ import React from 'react';
 import { ArticleData } from '../../../classes/article-data';
 import { Picture } from '../../../classes/picture';
 import PictureFullscreen from '../../../components/picture-fullscreen';
+import YoutubeEmbed from '../../../components/youtube-embed';
 import { getAllArticlesPaths, getArticleData } from '../../../lib/articles';
 import { shimmer, toBase64 } from '../../../lib/image-shimmer';
 import { getImgurPictures } from '../../../lib/imgur-pictures';
@@ -71,6 +72,12 @@ export default function Post({ props, _articleData, _pictures }) {
                         <span className={styles.date}>{articleData.date}</span>
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
+
+                    {articleData.youtubeId &&
+                        <div>
+                            <YoutubeEmbed embedId={articleData.youtubeId} />
+                        </div>
+                    }
 
 
                     <h1>Pictures</h1>
