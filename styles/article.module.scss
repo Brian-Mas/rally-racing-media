@@ -26,6 +26,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .picture {
@@ -33,7 +34,6 @@
     min-height: 30vh;
     position: relative;
     flex-basis: 100%;
-    margin-right: 1%;
     margin-bottom: 1%;
     border-radius: 5px;
     overflow: hidden;
@@ -55,7 +55,7 @@
 
 @media (min-width: 768px) {
     .picture {
-        flex-basis: 48%;
+        flex-basis: 49.5%;
     }
 }
 
@@ -65,16 +65,12 @@
     }
 
     .picture {
-        flex-basis: 30%;
+        flex-basis: 33%;
     }
 }
 
 @media (min-width: 1280px) {
     .container {
         width: 60vw;
-    }
-
-    .picture {
-        flex-basis: 30%;
     }
 }
