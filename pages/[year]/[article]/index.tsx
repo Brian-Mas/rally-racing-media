@@ -80,30 +80,34 @@ export default function Post({ props, _articleData, _pictures }) {
                     }
 
 
-                    <h1>Pictures</h1>
-                    <div className={styles.gallery}>
-                        {pictures.map((p, index) => {
-                            return (
-                                <div className={styles.picture}
-                                     key={index}>
+                    {articleData.albumId &&
+                        <div>
+                            <h1>Pictures</h1>
+                            <div className={styles.gallery}>
+                                {pictures.map((p, index) => {
+                                    return (
+                                    <div className={styles.picture}
+                                    key={index}>
                                     <div className={styles.logoOverlay}>
-                                        <Image src={'/RallyRacingMedia.svg'}
-                                               alt="Rally Racing Media logo"
-                                               width={100}
-                                               height={60} />
+                                    <Image src={'/RallyRacingMedia.svg'}
+                                    alt="Rally Racing Media logo"
+                                    width={100}
+                                    height={60} />
                                     </div>
                                     <Image src={p.link}
-                                           alt={articleData.title + '_' + index}
-                                           layout={'fill'}
-                                           objectFit={'cover'}
-                                           quality={40}
-                                           placeholder="blur"
-                                           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(1280, 720))}`}
-                                           onClick={() => { selectPicture(index); }} />
-                                </div>
-                            );
-                        })}
-                    </div>
+                                    alt={articleData.title + '_' + index}
+                                    layout={'fill'}
+                                    objectFit={'cover'}
+                                    quality={40}
+                                    placeholder="blur"
+                                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(1280, 720))}`}
+                                    onClick={() => { selectPicture(index); }} />
+                                    </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    }
                 </article>
             </div>
 
@@ -126,7 +130,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
     const articleData = await getArticleData(params.year as string, params.article as string);
-    const pictures = await getImgurPictures(articleData.albumId);
+    const pictures = articleData?.albumId ? await getImgurPictures(articleData.albumId) : [];
 
     return {
         props: {
